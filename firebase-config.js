@@ -1,7 +1,4 @@
-
-
-// Your web app's Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAeeo-Y58JbtyiWlG28ms_-T0z8TMrQpng",
   authDomain: "chat-app-a2d39.firebaseapp.com",
   projectId: "chat-app-a2d39",
@@ -11,4 +8,4 @@ var firebaseConfig = {
 };
 
 // Initialize Firebase
- var app=initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
