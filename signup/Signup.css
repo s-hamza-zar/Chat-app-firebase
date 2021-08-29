@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+* {
+  margin:0;
+  padding:0; 
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif; 
+}
+body
+{
+    overflow-x: hidden;
+}
+.container
+{
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+
+}
+.navigation
+{
+    position: fixed;
+    width: 500px;
+    height: 100%;
+    padding-top:100px;
+    padding-left: 60px;
+    padding-right: 60px;
+    background-color:#ffffff;
+    border-right: 4px solid lightgrey;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.main
+{
+    position:absolute;
+    width: 100%;
+    left: 500px;
+    margin: 0;
+    padding-right: 300px;
+    min-height: 100vh;
+    background-image: url(./signup.jpg);
+    background-size: 100vh;
+    background-position:contain;
+    background-repeat: no-repeat; 
+    background-size: 870px 700px;
+    transition: 0.5s;
+}
