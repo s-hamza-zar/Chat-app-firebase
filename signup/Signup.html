@@ -15,13 +15,37 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="signup.css" rel="stylesheet" />
 
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    
+    <script defer>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAeeo-Y58JbtyiWlG28ms_-T0z8TMrQpng",
+        authDomain: "chat-app-a2d39.firebaseapp.com",
+        projectId: "chat-app-a2d39",
+        storageBucket: "chat-app-a2d39.appspot.com",
+        messagingSenderId: "733188901312",
+        appId: "1:733188901312:web:7334fd5181c763cec6e025"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      const db = firebase.firestore();
+      const auth = firebase.auth();
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="signup.css" rel="stylesheet" />
+
     <title>Signup</title>
   </head>
   <body>
     <div class="container">
       <div class="navigation">
       <h2 style="padding-bottom: 10px;">Lets get Started</h2>
-      <form id="form" onsubmit="signup(event)">
+      <form id="form">
         <div class="mb-3">
           <label for="emailId" class="form-label">Email address</label>
           <input
@@ -65,10 +89,10 @@
     </div>
     </div>
     
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-    <script src="..//firebase-config.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    <script src="..//firebase-config.js"></script> -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

@@ -1,51 +1,36 @@
-var db = firebase.firestore();
+let signUpform = document.querySelector("#form");
+signUpform.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-//for session on bottom
+  //user info
+  let email = document.querySelector("#emailId").value;
+  let userName = document.querySelector("#userNameId").value;
+  let password = document.querySelector("#passwordId").value;
+  let confirmPassword = document.querySelector("#ConfirmPasswordId").value;
+  console.log(email, userName, password);
 
-let signup = (e) => {
-    console.log('event:', e)
-    e.preventDefault()
+  if (!(password.trim() === confirmPassword.trim())) {
+    alert("Password donot match");
+    return;
+  }
 
-    const username = document.getElementById('username').value
-    const email = document.getElementById('inputEmail').value
-    const password = document.getElementById('inputPassword').value
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((credentials) => {
+      console.log(credentials.user);
 
-    const userData = {
-        email,
-        password,
-        username
-    }
-
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Signed in 
-        // ...
-
-        var usersData = db.collection("user");
-
-        usersData.doc(userCredential.user.uid).set({
-          username: username, 
+      db.collection("users")
+        .doc(credentials.user.uid)
+        .set({
           email: email,
-          uid: userCredential.user.uid
+          name: userName,
+          id: credentials.user.uid,
+        })
+        .then((response) => {
+          location.assign("https://www.w3schools.com");
         });
-        swal({
-            title: "AWESOME!",
-            text: "You have successfully created an account!",
-            icon: "success",
-        }).then((value) => {
-            location.href = '../../dashboard/dashboard.html'
-        });
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        swal(`ERROR`, errorMessage, "error");
-        // ..
-      });
-}
-
-//for session
-const user = firebase.auth().currentUser;
-if (user !== null) {
-  location.href = '../../dashboard/dashboard.html'
-}
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+});
