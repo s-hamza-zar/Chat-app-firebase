@@ -27,10 +27,31 @@ signUpform.addEventListener("submit", (e) => {
           id: credentials.user.uid,
         })
         .then((response) => {
-          location.assign("https://www.w3schools.com");
+          // location.assign("https://www.w3schools.com");
+          console.log("hamza")
         });
     })
     .catch((error) => {
       alert(error.message);
     });
+    
+  let selectedfile;
+  let picture=document.querySelector("#customFile")
+  console.log("picture:",picture)
+
+  picture.addEventListener("change",(event)=>{
+
+    console.log(event)
+    
+    selectedfile=event.target.files[0];
+    
+    console.log("selectedfile:",selectedfile)
+    
+    
+    })
+  var storageRef = storage.ref("/images/")
+  console.log("storagref:",storageRef)
+  var uploadTask=storageRef.put(selectedfile);
+  console.log("upload:",uploadTask)
+
 });

@@ -23,13 +23,14 @@ body
     position: fixed;
     width: 500px;
     height: 100%;
-    padding-top:100px;
+    padding-top:60px;
     padding-left: 60px;
     padding-right: 60px;
+    padding-bottom: 60px;
     background-color:#ffffff;
     border-right: 4px solid lightgrey;
     transition: 0.5s;
-    overflow: hidden;
+    overflow-y:scroll;
 }
 .main
 {
