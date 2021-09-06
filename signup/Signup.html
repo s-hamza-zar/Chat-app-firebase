@@ -19,24 +19,8 @@
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-storage.js"></script>
-    
-    <script defer>
-      const firebaseConfig = {
-        apiKey: "AIzaSyAeeo-Y58JbtyiWlG28ms_-T0z8TMrQpng",
-        authDomain: "chat-app-a2d39.firebaseapp.com",
-        projectId: "chat-app-a2d39",
-        storageBucket: "chat-app-a2d39.appspot.com",
-        messagingSenderId: "733188901312",
-        appId: "1:733188901312:web:7334fd5181c763cec6e025"
-      };
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-
-      const db = firebase.firestore();
-      const auth = firebase.auth();
-      const storage=firebase.storage();
-    </script>
+    <script src="../firebase-config.js" defer></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="signup.css" rel="stylesheet" />
@@ -46,67 +30,69 @@
   <body>
     <div class="container">
       <div class="navigation">
-      <h2 style="padding-bottom: 6px;">Lets get Started</h2>
-      <form id="form">
-        <div class="mb-2">
-          <label for="emailId" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="emailId"
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
+        <h2 style="padding-bottom: 6px">Lets get Started</h2>
+        <form id="form">
+          <div class="mb-2">
+            <label for="emailId" class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="emailId"
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
           </div>
-        </div>
-        <div class="mb-2">
-          <label for="userNameId" class="form-label">User Name</label>
-          <input
-            type="user"
-            class="form-control"
-            id="userNameId"
-            aria-describedby="userHelp"
-          />
-        </div>
-        <div class="mb-2">
-        <label class="form-label" for="customFile">Upload picture</label>
-         <input type="file" class="form-control" id="customFile" />
-         <div id="pictureHelp" class="form-text">
-          PNG or Jpeg
-        </div>
-         </div>
-        <div class="mb-2">
-          <label for="userBio" class="form-label">Short Bio</label>
-          <input
-            type="text"
-            class="form-control"
-            id="userBio"
-            aria-describedby="userHelp"
-          />
-        </div>
-        <div class="mb-2">
-          <label for="passwordId" class="form-label">Password</label>
-          <input type="password" class="form-control" id="passwordId" />
-        </div>
-        <div class="mb-2">
-          <label for="ConfirmPasswordId" class="form-label"
-            >Confirm Password</label
-          >
-          <input type="password" class="form-control" id="ConfirmPasswordId" />
-        </div>
-        <div class="mb-2">
-          <a href="./login.html" class="link-primary">Already have an account?</a>
-        </div>
-        
-        <button type="submit" class="btn btn-outline-primary">Signup</button>
-      </form>
-    </div>
-    <div class="main">
+          <div class="mb-2">
+            <label for="userNameId" class="form-label">User Name</label>
+            <input
+              type="user"
+              class="form-control"
+              id="userNameId"
+              aria-describedby="userHelp"
+            />
+          </div>
+          <div class="mb-2">
+            <label class="form-label" for="customFile">Upload picture</label>
+            <input type="file" class="form-control" id="customFile" />
+            <div id="pictureHelp" class="form-text">PNG or Jpeg</div>
+          </div>
+          <div class="mb-2">
+            <label for="userBio" class="form-label">Short Bio</label>
+            <input
+              type="text"
+              class="form-control"
+              id="userBio"
+              aria-describedby="userHelp"
+            />
+          </div>
+          <div class="mb-2">
+            <label for="passwordId" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passwordId" />
+          </div>
+          <div class="mb-2">
+            <label for="ConfirmPasswordId" class="form-label"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="ConfirmPasswordId"
+            />
+          </div>
+          <div class="mb-2">
+            <a href="./login.html" class="link-primary"
+              >Already have an account?</a
+            >
+          </div>
 
+          <button type="submit" class="btn btn-outline-primary">Signup</button>
+        </form>
+      </div>
+      <div class="main"></div>
     </div>
-    </div>
-    
+
     <!-- <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>

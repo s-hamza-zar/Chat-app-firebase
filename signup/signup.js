@@ -2,19 +2,18 @@ let signUpform = document.querySelector("#form");
 let image;
 let selectedfile;
 
-let picture=document.querySelector("#customFile")
-  console.log("picture:",picture)
+let picture = document.querySelector("#customFile");
+console.log("picture:", picture);
 
-  picture.addEventListener("change",(event)=>{
+picture.addEventListener("change", (event) => {
+  console.log(event);
 
-    console.log(event)
-    
-    selectedfile=event.target.files[0];
-    
-    console.log("selectedfile:",selectedfile)
-    })
+  selectedfile = event.target.files[0];
 
-signUpform.addEventListener("submit", (e) => {
+  console.log("selectedfile:", selectedfile);
+});
+
+signUpform.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   //user info
@@ -30,42 +29,35 @@ signUpform.addEventListener("submit", (e) => {
     return;
   }
   //creating reference and uploading image to storage//
-  let filename=selectedfile.name;
-  var storageRef = storage.ref("/images/"+filename);
-  console.log("storagref:",storageRef)
-  var uploadTask=storageRef.put(selectedfile);
-  console.log("upload:",uploadTask)
+  let filename = selectedfile.name;
+  var storageRef = storage.ref("/images/" + filename);
+  console.log("storagref:", storageRef);
 
-  //getting url from firebase storage//
-  uploadTask.on('state_changed', 
-  (snapshot) =>{
-  snapshot.ref.getDownloadURL()
-  .then((downloadURL) => {
-    console.log('File available at', downloadURL);
-    image=downloadURL
-  //auth user and creating db//  
-    auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((credentials) => {
-      console.log(credentials.user);
+  let url = "";
 
-      db.collection("users")
-        .doc(credentials.user.uid)
-        .set({
-          email: email,
-          name: userName,
-          id: credentials.user.uid,
-          avatar:image
-          
-        })
-        .then((response) => {
-          location.assign("http://google.com/");
-        });
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
+  try {
+    var uploadTask = await storageRef.put(selectedfile);
+    url = await uploadTask.ref.getDownloadURL();
+  } catch (error) {
+    alert(error);
+    return;
+  }
+  auth.createUserWithEmailAndPassword(email, password).then((credentials) => {
+    console.log(credentials.user);
+
+    db.collection("users")
+      .doc(credentials.user.uid)
+      .set({
+        email: email,
+        name: userName,
+        id: credentials.user.uid,
+        avatar: url,
+      })
+      .then((response) => {
+        location.assign("http://google.com/");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   });
-  });
-
 });
