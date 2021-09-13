@@ -2,6 +2,7 @@ let profile = ``;
 let userId;
 let selectedChat;
 let filtersUsers;
+let defultUser;
 
 auth.onAuthStateChanged((user) => {
   userId = user.uid;
@@ -34,6 +35,9 @@ db.collection("users")
     filtersUsers=snapshot.docs.filter((details) =>{
         return details.id!=userId
         })
+         defultUser=filtersUsers[0].id
+         selectedChat=defultUser+userId
+         console.log("defult",selectedChat)
          filtersUsers.forEach((doc) => {
          renderUsers(doc);
     });
