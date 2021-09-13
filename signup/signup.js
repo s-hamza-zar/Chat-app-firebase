@@ -22,6 +22,7 @@ signUpform.addEventListener("submit", async (e) => {
   let userName = document.querySelector("#userNameId").value;
   let password = document.querySelector("#passwordId").value;
   let confirmPassword = document.querySelector("#ConfirmPasswordId").value;
+  let bio=document.querySelector("#userBio").value
   console.log(email, userName, password);
 
   if (!(password.trim() === confirmPassword.trim())) {
@@ -52,9 +53,10 @@ signUpform.addEventListener("submit", async (e) => {
         name: userName,
         id: credentials.user.uid,
         avatar: url,
+        shortBio:bio,
       })
       .then((response) => {
-        location.assign("http://google.com/");
+        location.assign("file:///C:/Users/d/Desktop/Chat%20app/app/Index.html");
       })
       .catch((error) => {
         alert(error.message);

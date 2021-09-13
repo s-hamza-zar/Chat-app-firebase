@@ -171,11 +171,28 @@ border-radius: 40px;
   color:green;
 }
 .message-box{
+  padding-top: 10px;
   width: 760px;
-  height: 440px;
-  background:gray;
-}
+  height: 430px;
+  background:white;
+  display: flex;
+  justify-content: space-between;
 
+}
+.content-box-right{
+  width: 300px;
+  height: 100px;
+  background: blue;
+  border-radius: 20px;
+  padding-left: 20px;
+}
+/* .content-box-left{
+  width: 300px;
+  height: 100px;
+  background: blue;
+  border-radius: 20px;
+  padding-left: 20px;
+} */
 
 
 .bottom-bar{

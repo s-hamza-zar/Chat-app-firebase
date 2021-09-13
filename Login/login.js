@@ -11,7 +11,7 @@ auth.signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    location.assign("https://github.com/")
+    location.assign("file:///C:/Users/d/Desktop/Chat%20app/app/Index.html")
     // ...
   })
   .catch((error) => {
