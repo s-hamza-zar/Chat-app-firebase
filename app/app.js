@@ -9,6 +9,7 @@ let reciverUsers = [];
 let reciverData;
 let i = 0;
 let allUsers = [];
+let personToChat;
 auth.onAuthStateChanged((user) => {
   loginUserId = user.uid;
 
@@ -68,13 +69,12 @@ function renderUsers(doc) {
 }
 function chatPerson(currentSenderId) {
   setCurrentUser(currentSenderId)
-  console.log("SENDER",currentSenderId)
+  console.log("reciver",currentSenderId)
   selectedChat = currentSenderId + loginUserId;
 }
 
 function setCurrentUser(currentSenderId){
-  console.log("Chatpersonsender",currentSenderId)
-  const personToChat=allUsers.find((item)=>item.id===currentSenderId)
+  personToChat=allUsers.find((item)=>item.id===currentSenderId)
   let topBar=``
   topBar=`
   <img src="${personToChat.avatar}" alt="" />
@@ -89,16 +89,14 @@ let messageSubmit = document.querySelector("#form");
 let message = document.querySelector("#message");
 messageSubmit.addEventListener("submit", (e) => {
   e.preventDefault();
+
+
   
-  db.collection("chats").doc(selectedChat).set({
+ db.collection("chats").doc(selectedChat).collection("messages").doc().set({
       userMessage: message.value,
-      sender: loginUserId,
-      reciver:reciverId,
+      sender: loginUserData,
+      reciver: personToChat,
+      date: new Date()
   })
+  message.value=""
 });
-
-
-// function bnao jissy dom sa current selected user ki id sa allUsers sa name and avtar get krky header pa set krdy 
-// function first time pa bhi call hoga 
-// aur kb click krain tb bhi tk dom pa set krta rhy 
-// user find 
