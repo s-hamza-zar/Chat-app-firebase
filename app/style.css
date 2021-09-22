@@ -170,36 +170,52 @@ border-radius: 40px;
   padding-top: 16px;
   color:green;
 }
-.message-box{
-  padding-top: 10px;
+
+.midle{
   width: 760px;
-  height: 430px;
-  background:white;
+  height: 400px;
+  background: #0b0d11;
+
+}
+.content-box{
+  /* padding-top: 20px;
+  padding-left: 20px; */
+  background-color: wheat;
+  width: 300px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 
 }
-.content-box-right{
-  width: 300px;
-  height: 100px;
-  background: blue;
-  border-radius: 20px;
-  padding-left: 20px;
+.user-details{
+  width: 40px;
+  height: 40px;
+  padding-top: 20px;
+  padding-left: 18px;
 }
-/* .content-box-left{
-  width: 300px;
-  height: 100px;
-  background: blue;
-  border-radius: 20px;
-  padding-left: 20px;
-} */
-
+.user-details img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* padding-right: 10px; */
+}
+.message-box{
+  width: 200px;
+  height: 50px;
+  background: rgb(255, 254, 254);
+  border-radius: 50px;
+  margin-top: 12px;
+}
+.inner-content{
+  padding: 0;
+  margin: 0;
+}
 
 .bottom-bar{
   width: 760px;
   height: 54px;
   display: flex;
-  background: #EDEDED;
+  background: #da1616;
   justify-content: space-between;
 }
 .bottom-bar span{
@@ -220,7 +236,8 @@ border-radius: 40px;
   border-radius: 20px;
 }
 .bottom-bar form input .placeholder{
-  background: black;
+  background: rgb(255, 255, 255);
+  border: none;
 }
 
 form .fa{

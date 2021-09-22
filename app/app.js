@@ -44,13 +44,21 @@ db.collection("users")
     });
     defultUser = filtersUsers[0];
     console.log("defulatuser", defultUser.id);
+    if(defultUser.id.charAt(0)>loginUserId.charAt(0)){
+
     selectedChat = defultUser.id + loginUserId;
+    }
+    else{
+      selectedChat =loginUserId + defultUser.id;
+    }
+    console.log(">>>>>",selectedChat)
     filtersUsers.forEach((doc) => {
       allUsers.push(doc.data());
       renderUsers(doc);
+      
     });
     setCurrentUser(defultUser.id)
-
+    displayChat()
   });
 
 function renderUsers(doc) {
@@ -70,7 +78,13 @@ function renderUsers(doc) {
 function chatPerson(currentSenderId) {
   setCurrentUser(currentSenderId)
   console.log("reciver",currentSenderId)
-  selectedChat = currentSenderId + loginUserId;
+  if(currentSenderId.charAt(0)>loginUserId.charAt(0)){
+    selectedChat = currentSenderId + loginUserId;
+  }
+  else{
+    selectedChat =  loginUserId +currentSenderId;
+  }
+  
 }
 
 function setCurrentUser(currentSenderId){
@@ -96,7 +110,33 @@ messageSubmit.addEventListener("submit", (e) => {
       userMessage: message.value,
       sender: loginUserData,
       reciver: personToChat,
-      date: new Date()
+      date:Date.now()
   })
   message.value=""
 });
+
+function  displayChat (){
+  console.log("help")
+  db.collection("chats").doc(selectedChat).collection("messages").orderBy('date').onSnapshot((change=>{
+    console.log("lllllll",change)
+    change.forEach((doc)=>{
+      console.log(doc.data())
+      let position;
+      if(doc.data().sender.id==loginUserData.id)
+      {
+           position='d-flex justify-content-end mb-4'
+
+      }
+      else{
+        position='d-flex justify-content-start mb-4'
+      }
+     console.log("position",position)
+     
+    
+    
+    })
+  }))
+
+
+}
+
