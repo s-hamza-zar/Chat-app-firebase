@@ -127,7 +127,7 @@ function  displayChat (){
       if(doc.data().sender.id==loginUserData.id)
       {    console.log("sender")
            position='d-flex justify-content-end mb-4'
-           htmldiv = `
+           htmldiv+= `
            <div class="${position}">
            </div>
            <div class="${position}">
@@ -140,12 +140,12 @@ function  displayChat (){
                </div>     
            </div>`;
       
-           document.getElementById('chat').innerHTML+= htmldiv
+           document.getElementById('chat').innerHTML= htmldiv
       }
       else if(doc.data().reciver.id=personToChat.id){
         position='d-flex justify-content-start mb-4'
         console.log("reciver")
-        htmldiv = `
+        htmldiv+= `
            <div class="${position} style="margin-left:10px;">
                <div class="img_cont">
                    <img src="${doc.data().sender.avatar}" class="rounded-circle user_img_msg">
@@ -156,7 +156,7 @@ function  displayChat (){
                </div>     
            </div>`;
       
-           document.getElementById('chat').innerHTML+= htmldiv
+           document.getElementById('chat').innerHTML= htmldiv
       }
      
     })
