@@ -10,6 +10,8 @@ let reciverData;
 let i = 0;
 let allUsers = [];
 let personToChat;
+let htmldiv=``
+
 auth.onAuthStateChanged((user) => {
   loginUserId = user.uid;
 
@@ -70,7 +72,7 @@ function renderUsers(doc) {
    <td class="inner-profile"><h4>${doc.data().name.toUpperCase()}</h4><p>${
     doc.data().shortBio
   }</p></td>
-   <td class="inner-date">Date<br><i class="fa fa-check-circle" aria-hidden="true"></i></td>
+   <td class="inner-date"><i class="fa fa-user-circle" aria-hidden="true"></i></td>
  </tr>`;
 
   document.querySelector("#table-body").innerHTML += table;
@@ -110,7 +112,7 @@ messageSubmit.addEventListener("submit", (e) => {
       userMessage: message.value,
       sender: loginUserData,
       reciver: personToChat,
-      date:Date.now()
+      date: Date.now()
   })
   message.value=""
 });
@@ -123,17 +125,40 @@ function  displayChat (){
       console.log(doc.data())
       let position;
       if(doc.data().sender.id==loginUserData.id)
-      {
+      {    console.log("sender")
            position='d-flex justify-content-end mb-4'
-
+           htmldiv = `
+           <div class="${position}">
+           </div>
+           <div class="${position}">
+               <div class="img_cont">
+                   <img src="${doc.data().sender.avatar}" class="rounded-circle user_img_msg">
+               </div>
+               <div class="msg_cotainer" style="background:#EAF3FF;">
+               <h6>${doc.data().userMessage}</h6>   
+              
+               </div>     
+           </div>`;
+      
+           document.getElementById('chat').innerHTML+= htmldiv
       }
-      else{
+      else if(doc.data().reciver.id=personToChat.id){
         position='d-flex justify-content-start mb-4'
+        console.log("reciver")
+        htmldiv = `
+           <div class="${position} style="margin-left:10px;">
+               <div class="img_cont">
+                   <img src="${doc.data().sender.avatar}" class="rounded-circle user_img_msg">
+               </div>
+               <div class="msg_cotainer" style="background: #F9F9F9;">
+               <h6>${doc.data().userMessage}</h6>
+                   
+               </div>     
+           </div>`;
+      
+           document.getElementById('chat').innerHTML+= htmldiv
       }
-     console.log("position",position)
      
-    
-    
     })
   }))
 
