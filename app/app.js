@@ -10,7 +10,6 @@ let reciverData;
 let i = 0;
 let allUsers = [];
 let personToChat;
-let htmldiv=``
 
 auth.onAuthStateChanged((user) => {
   loginUserId = user.uid;
@@ -46,25 +45,23 @@ db.collection("users")
     });
     defultUser = filtersUsers[0];
     console.log("defulatuser", defultUser.id);
-    if(defultUser.id.charAt(0)>loginUserId.charAt(0)){
-
-    selectedChat = defultUser.id + loginUserId;
+    if (defultUser.id.charAt(0) > loginUserId.charAt(0)) {
+      selectedChat = defultUser.id + loginUserId;
+    } else {
+      selectedChat = loginUserId + defultUser.id;
     }
-    else{
-      selectedChat =loginUserId + defultUser.id;
-    }
-    console.log(">>>>>",selectedChat)
+    console.log(">>>>>", selectedChat);
     filtersUsers.forEach((doc) => {
       allUsers.push(doc.data());
       renderUsers(doc);
-      
     });
-    setCurrentUser(defultUser.id)
-    displayChat()
+    setCurrentUser(defultUser.id);
+  })
+  .then(() => {
+    displayChat();
   });
 
 function renderUsers(doc) {
-
   let table = ``;
   table = `
    <tr class="inner-drawer" onclick="chatPerson('${doc.data().id}')">
@@ -78,90 +75,90 @@ function renderUsers(doc) {
   document.querySelector("#table-body").innerHTML += table;
 }
 function chatPerson(currentSenderId) {
-  setCurrentUser(currentSenderId)
-  console.log("reciver",currentSenderId)
-  if(currentSenderId.charAt(0)>loginUserId.charAt(0)){
+  setCurrentUser(currentSenderId);
+  console.log("reciver", currentSenderId);
+  if (currentSenderId.charAt(0) > loginUserId.charAt(0)) {
     selectedChat = currentSenderId + loginUserId;
+  } else {
+    selectedChat = loginUserId + currentSenderId;
   }
-  else{
-    selectedChat =  loginUserId +currentSenderId;
-  }
-  
+  displayChat()
 }
 
-function setCurrentUser(currentSenderId){
-  personToChat=allUsers.find((item)=>item.id===currentSenderId)
-  let topBar=``
-  topBar=`
+function setCurrentUser(currentSenderId) {
+  personToChat = allUsers.find((item) => item.id === currentSenderId);
+  let topBar = ``;
+  topBar = `
   <img src="${personToChat.avatar}" alt="" />
   <h4>${personToChat.name.toUpperCase()}</h4>
   <i class="fa fa-circle" aria-hidden="true"></i>
-  `
+  `;
   document.querySelector(".top-bar").innerHTML = topBar;
 }
-
 
 let messageSubmit = document.querySelector("#form");
 let message = document.querySelector("#message");
 messageSubmit.addEventListener("submit", (e) => {
   e.preventDefault();
 
-
-  
- db.collection("chats").doc(selectedChat).collection("messages").doc().set({
-      userMessage: message.value,
-      sender: loginUserData,
-      reciver: personToChat,
-      date: Date.now()
-  })
-  message.value=""
+  db.collection("chats").doc(selectedChat).collection("messages").doc().set({
+    userMessage: message.value,
+    sender: loginUserData,
+    reciver: personToChat,
+    date: Date.now(),
+  });
+  message.value = "";
 });
 
-function  displayChat (){
-  console.log("help")
-  db.collection("chats").doc(selectedChat).collection("messages").orderBy('date').onSnapshot((change=>{
-    console.log("lllllll",change)
-    change.forEach((doc)=>{
-      console.log(doc.data())
-      let position;
-      if(doc.data().sender.id==loginUserData.id)
-      {    console.log("sender")
-           position='d-flex justify-content-end mb-4'
-           htmldiv+= `
+let div = document.querySelector("#chat");
+
+function displayChat() {
+  db.collection("chats")
+    .doc(selectedChat)
+    .collection("messages")
+    .orderBy("date")
+    .onSnapshot((change) => {
+      let htmldiv = "";
+      div.innerHTML = "";
+      change.forEach((doc) => {
+        let position;
+        if (doc.data().sender.id == loginUserData.id) {
+          // console.log("sender");
+          position = "d-flex justify-content-end mb-4";
+          htmldiv += `
            <div class="${position}">
            </div>
            <div class="${position}">
                <div class="img_cont">
-                   <img src="${doc.data().sender.avatar}" class="rounded-circle user_img_msg">
+                   <img src="${
+                     doc.data().sender.avatar
+                   }" class="rounded-circle user_img_msg">
                </div>
                <div class="msg_cotainer" style="background:#EAF3FF;">
                <h6>${doc.data().userMessage}</h6>   
               
                </div>     
            </div>`;
-      
-           document.getElementById('chat').innerHTML= htmldiv
-      }
-      else if(doc.data().reciver.id=personToChat.id){
-        position='d-flex justify-content-start mb-4'
-        console.log("reciver")
-        htmldiv+= `
+
+          document.getElementById("chat").innerHTML = htmldiv;
+        } else if ((doc.data().reciver.id = personToChat.id)) {
+          position = "d-flex justify-content-start mb-4";
+          console.log("reciver");
+          htmldiv += `
            <div class="${position} style="margin-left:10px;">
                <div class="img_cont">
-                   <img src="${doc.data().sender.avatar}" class="rounded-circle user_img_msg">
+                   <img src="${
+                     doc.data().sender.avatar
+                   }" class="rounded-circle user_img_msg">
                </div>
                <div class="msg_cotainer" style="background: #F9F9F9;">
                <h6>${doc.data().userMessage}</h6>
                    
                </div>     
            </div>`;
-      
-           document.getElementById('chat').innerHTML= htmldiv
-      }
-     
-    })
-  }))
 
-
+          document.getElementById("chat").innerHTML = htmldiv;
+        }
+      });
+    });
 }
-

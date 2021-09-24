@@ -12,10 +12,12 @@ picture.addEventListener("change", (event) => {
 
   console.log("selectedfile:", selectedfile);
 });
+var loader = document.querySelector(".overlay");
+console.log(loader)
 
 signUpform.addEventListener("submit", async (e) => {
   e.preventDefault();
-
+  loader.style.display = "inline-block";
   //user info
 
   let email = document.querySelector("#emailId").value;
@@ -27,6 +29,7 @@ signUpform.addEventListener("submit", async (e) => {
 
   if (!(password.trim() === confirmPassword.trim())) {
     alert("Password donot match");
+    loader.style.display = "none";
     return;
   }
   //creating reference and uploading image to storage//
@@ -41,6 +44,7 @@ signUpform.addEventListener("submit", async (e) => {
     url = await uploadTask.ref.getDownloadURL();
   } catch (error) {
     alert(error);
+    loader.style.display = "none";
     return;
   }
   auth.createUserWithEmailAndPassword(email, password).then((credentials) => {
